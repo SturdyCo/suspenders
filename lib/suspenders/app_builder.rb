@@ -139,23 +139,6 @@ module Suspenders
         after: "config.action_mailer.raise_delivery_errors = false"
     end
 
-    def enable_rack_canonical_host
-      config = <<-RUBY
-
-  if ENV.fetch("HEROKU_APP_NAME", "").include?("staging-pr-")
-    ENV["APPLICATION_HOST"] = ENV["HEROKU_APP_NAME"] + ".herokuapp.com"
-  end
-
-  config.middleware.use Rack::CanonicalHost, ENV.fetch("APPLICATION_HOST")
-      RUBY
-
-      inject_into_file(
-        "config/environments/production.rb",
-        config,
-        after: "Rails.application.configure do",
-      )
-    end
-
     def enable_rack_deflater
       configure_environment "production", "config.middleware.use Rack::Deflater"
     end
@@ -266,10 +249,6 @@ module Suspenders
     def configure_i18n_for_missing_translations
       raise_on_missing_translations_in("development")
       raise_on_missing_translations_in("test")
-    end
-
-    def configure_background_jobs_for_rspec
-      run 'rails g delayed_job:active_record'
     end
 
     def configure_action_mailer_in_specs

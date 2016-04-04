@@ -63,7 +63,6 @@ module Suspenders
       build :replace_gemfile, options[:path]
       build :set_ruby_to_version_being_used
       bundle_command 'install'
-      build :configure_simple_form
     end
 
     def setup_database
@@ -111,7 +110,6 @@ module Suspenders
       say 'Setting up the production environment'
       build :configure_smtp
       build :configure_rack_timeout
-      build :enable_rack_canonical_host
       build :enable_rack_deflater
       build :setup_asset_host
     end
@@ -245,8 +243,15 @@ module Suspenders
     end
 
     def outro
-      say 'Congratulations! You just pulled our suspenders.'
-      say honeybadger_outro
+      require 'catpix'
+      Catpix::print_image 'logo.png'
+      say '='*20
+      say '='*20
+      say 'TODOS:'
+      say 'Set up AppSignal'
+      say 'Set up Circle CI'
+      say '='*20
+      say '='*20
     end
 
     def self.banner
@@ -263,16 +268,5 @@ module Suspenders
       !options[:skip_active_record]
     end
 
-    private
-
-    def honeybadger_outro
-      "Run 'bundle exec honeybadger heroku install' with your API key#{honeybadger_message_suffix}."
-    end
-
-    def honeybadger_message_suffix
-      if options[:heroku]
-        " unless you're using the Heroku Honeybadger add-on"
-      end
-    end
   end
 end

@@ -12,11 +12,13 @@ your machine with [this script].
 
 [this script]: https://github.com/thoughtbot/laptop
 
-After setting up, you can run the application using [Heroku Local]:
+### Error tracking and monitoring
 
-    % heroku local
+Log into [AppSignal](https://appsignal.com/) and create a new app. Follow the steps they provide and run the generator. Replace the hard coded API key with `ENV['APPSIGNAL_API_KEY']`. Add the key to `.env`.
 
-[Heroku Local]: https://devcenter.heroku.com/articles/heroku-local
+### CI
+
+Log into [CircleCI](https://circleci.com) and create a new project that points to the Github repo.
 
 ## Guidelines
 
