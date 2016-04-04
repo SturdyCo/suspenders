@@ -47,6 +47,7 @@ module Suspenders
       invoke :remove_config_comment_lines
       invoke :remove_routes_comment_lines
       invoke :setup_dotfiles
+      invoke :setup_sidekiq
       invoke :setup_git
       invoke :setup_database
       invoke :create_local_heroku_setup
@@ -117,6 +118,11 @@ module Suspenders
     def setup_secret_token
       say 'Moving secret token out of version control'
       build :setup_secret_token
+    end
+
+    def setup_sidekiq
+      say 'Setting up Sidekiq'
+      build :setup_sidekiq
     end
 
     def create_suspenders_views
@@ -243,8 +249,8 @@ module Suspenders
     end
 
     def outro
-      require 'catpix'
-      Catpix::print_image 'logo.png'
+      # require 'catpix'
+      # Catpix::print_image 'logo.png'
       say '='*20
       say '='*20
       say 'TODOS:'

@@ -27,6 +27,11 @@ module Suspenders
       template "Gemfile.erb", "Gemfile"
     end
 
+    def setup_sidekiq
+      copy_file 'sidekiq.yml', 'config/sidekiq.yml'
+      copy_file 'sidekiq_initializer.rb', 'config/initializers/sidekiq.rb'
+    end
+
     def setup_rack_mini_profiler
       copy_file(
         "rack_mini_profiler.rb",
