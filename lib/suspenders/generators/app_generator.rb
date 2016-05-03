@@ -140,6 +140,7 @@ module Suspenders
       build :setup_default_rake_task
       build :replace_default_puma_configuration
       build :set_up_forego
+      build :set_up_foreman
       build :setup_rack_mini_profiler
     end
 
