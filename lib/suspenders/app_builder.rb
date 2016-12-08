@@ -107,7 +107,7 @@ module Suspenders
       generate.request_specs false
       generate.routing_specs false
       generate.stylesheets false
-      generate.test_framework :rspec
+      generate.test_framework :test_unit
       generate.view_specs false
     end
 
@@ -151,7 +151,7 @@ module Suspenders
     def setup_asset_host
       replace_in_file 'config/environments/production.rb',
         "# config.action_controller.asset_host = 'http://assets.example.com'",
-        'config.action_controller.asset_host = ENV.fetch("ASSET_HOST", ENV.fetch("APPLICATION_HOST"))'
+        'config.action_controller.asset_host = ENV.fetch("ASSET_HOST", ENV["APPLICATION_HOST"])'
 
       replace_in_file 'config/initializers/assets.rb',
         "config.assets.version = '1.0'",
@@ -280,7 +280,7 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
     def configure_action_mailer
       action_mailer_host "development", %{"localhost:3000"}
       action_mailer_host "test", %{"www.example.com"}
-      action_mailer_host "production", %{ENV.fetch("APPLICATION_HOST")}
+      action_mailer_host "production", %{ENV["APPLICATION_HOST"]}
     end
 
     def configure_active_job

@@ -1,5 +1,4 @@
 ---
 :concurrency: 3
-:logfile: ./log/sidekiq.log
 :queues:
   - default
