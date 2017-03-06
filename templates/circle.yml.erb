@@ -4,3 +4,8 @@ database:
 test:
   override:
     - COVERAGE=true bin/rake
+
+notify:
+  webhooks:
+    # A list of hook hashes, containing the URL field
+    - url: http://sturdy-notification-bot.herokuapp.com/events
