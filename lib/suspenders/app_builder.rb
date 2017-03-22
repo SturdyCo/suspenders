@@ -285,7 +285,7 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
 
     def configure_active_job
       configure_application_file(
-        "config.active_job.queue_adapter = :async"
+        "config.active_job.queue_adapter = :sidekiq"
       )
       configure_environment "test", "config.active_job.queue_adapter = :inline"
     end
