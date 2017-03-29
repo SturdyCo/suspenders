@@ -429,14 +429,7 @@ you can deploy to staging and production with:
       append_file 'Rakefile' do
         <<-EOS
 task(:default).clear
-task default: [:spec]
-
-if defined? RSpec
-  task(:spec).clear
-  RSpec::Core::RakeTask.new(:spec) do |t|
-    t.verbose = false
-  end
-end
+task default: [:test]
         EOS
       end
     end
