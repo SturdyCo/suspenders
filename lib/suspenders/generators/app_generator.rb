@@ -238,8 +238,6 @@ module Suspenders
     end
 
     def outro
-      # require 'catpix'
-      # Catpix::print_image 'logo.png'
       say '='*20
       say '='*20
       say 'TODOS:'
